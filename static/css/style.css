@@ -11,3 +11,9 @@
 .btn-group button.btn {
     width: 33.3%;
 }
+
+h1 {
+    font-weight: bold;
+    color: #fff;
+    font-size: 32px;
+  }
