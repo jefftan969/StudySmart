@@ -8,5 +8,5 @@ setInterval(() => {
 
 
 function plotPoints(dataValues) {
-    console.log("ploting updates...")
+    console.log("ploting updates:" + dataValues)
 }
