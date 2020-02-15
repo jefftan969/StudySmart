@@ -12,6 +12,8 @@ var markerPeople = {};
 var buildingOccupancy = {};
 
 function plotPoints(dataValues) {
+    console.log(dataValues);
+
     var index = 0;
     markerOccupancy = {};
     // Update occupancy data
