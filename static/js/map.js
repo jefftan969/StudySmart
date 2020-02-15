@@ -8,7 +8,7 @@ $(function() {
             markers: [{
                 attribute: "fill",
                 values: markerData["occupancy"],
-                scale: ["#e5fee9", "#0fa515"]
+                scale: ["#0fa515", "#e5fee9", "#808080"]
             },{
                 attribute: "r",
                 values: markerData["size"],
@@ -17,9 +17,14 @@ $(function() {
             regions: [{
                 attribute: "fill",
                 values: buildingData,
-                scale: ["#c8eeff", "#0071a4"],
+                scale: ["#0071a4", "#c8eeff", "#444444"],
                 normalizeFunction: "linear"
             }]
+        },
+        focusOn: {
+            x: 1,
+            y: 0.6,
+            scale: 2.2
         },
         onRegionTipShow: function(event, label, code) {
             if(buildingData[code] != "0") {
@@ -29,7 +34,7 @@ $(function() {
         onMarkerTipShow: function(event, label, index) {
             label.html(
                 "<b>"+markerData["name"][index]+"</b><br/>"+
-                "<b>Size: "+markerData["size"][index]+"</br>"+
+                "<b>Seats: "+markerData["size"][index]+"</br>"+
                 "<b>Occupancy: "+markerData["occupancy"][index]+"%"
             );
         }
