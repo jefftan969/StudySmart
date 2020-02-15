@@ -38,12 +38,13 @@ def nodeUpdate():
 
 @app.route('/getNodeData', methods=['GET'])
 def getNodeData():
-    node = request.form.get('node')
-    return deviceData[node]
+    node = request.args.get('node')
+    print("Returning data for node %s" % node)
+    return str(list(deviceData[node]))
 
 @app.route('/getLastVals', methods=['GET'])
 def getLastVals():
-    return {key:value[-1] for (key,value) in deviceData.items()} #gets most recent entry for each elem
+    return str({key:value[-1] for (key,value) in deviceData.items()}) #gets most recent entry for each elem
 
 # run the server
 if __name__ == '__main__':

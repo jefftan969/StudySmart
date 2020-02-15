@@ -31,5 +31,6 @@
         ".vscode{,/**}"
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/e3b42d89-8e92-4dfc-847d-2c37957d38b8/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/tartanhacks2020",
-    "appService.deploySubpath": ""
+    "appService.deploySubpath": "",
+    "python.pythonPath": "/usr/local/bin/python3"
 }
