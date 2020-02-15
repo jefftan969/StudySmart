@@ -3,9 +3,14 @@ from flask import Flask, render_template, request, jsonify
 import scripts.ledctrl as ledCtrl
 import scripts.color as colorUtil
 import time
+from collections import deque
 
 # initialize flask
 app = Flask(__name__)
+
+# initialize data structure to hold known device counts
+numOldEntries = 25
+deviceData = {}
 
 # routes
 
@@ -17,28 +22,28 @@ def before_first_request():
 def home():
     return render_template('index.html')
 
-@app.route('/solidcolor', methods=['POST'])
-def changeToSolidColor():
-    newColor = request.form.get('color')
-    print("Setting solid color to %s" % newColor)
-    return ""
+@app.route('/nodeUpdate', methods=['POST'])
+def nodeUpdate():
+    node = request.form.get('node')
+    newValue = request.form.get('value')
 
-@app.route('/brightnesschange', methods=['POST'])
-def changeBrightness():
-    newBrightness = request.form.get('brightness')
-    print("Setting brightness to %s%%" % newBrightness)
-    return ""
-
-@app.route('/pattern', methods=['POST'])
-def startPattern():
-    pattern = request.form.get('pattern')
-    if pattern == "rainbow":
-        print("Starting rainbow...")
-    elif pattern == "sparkle":
-        print("Starting sparkle...")
+    if node not in deviceData.keys():
+        # add new queue entry into deviceData
+        deviceData[node] = deque([newValue], numOldEntries)
     else:
-        print("Invalid pattern: %s" % pattern)
+        deviceData[node].append(newValue)
+
+    print("Adding data to node %s: %s" % (node, newValue))
     return ""
+
+@app.route('/getNodeData', methods=['GET'])
+def getNodeData():
+    node = request.form.get('node')
+    return deviceData[node]
+
+@app.route('/getLastVals', methods=['GET'])
+def getLastVals():
+    return {key:value[-1] for (key,value) in deviceData.items()} #gets most recent entry for each elem
 
 # run the server
 if __name__ == '__main__':
