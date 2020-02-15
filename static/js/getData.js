@@ -15,8 +15,8 @@ function plotPoints(dataValues) {
     markerOccupancy = {};
     // Update occupancy data
     for(var marker in markerNames) {
-        // var numPeople = dataValues[index];
-        var numPeople = Math.floor(15 * Math.random());
+        var numPeople = dataValues[index];
+        // var numPeople = Math.floor(15 * Math.random());
         var occupancy = ((numPeople / markerSizes[marker]) * 100).toPrecision(4);
         markerPeople[marker] = numPeople;
         markerOccupancy[marker] = occupancy;
