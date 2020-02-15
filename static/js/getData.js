@@ -1,7 +1,8 @@
 setInterval(() => {
-    $.get("/getLastVals", (dat) => {
+    $.get("/getLastVals", (data) => {
+        dat = JSON.parse(data.replace(/'/g, '"'))
         plotPoints(Object.keys(dat).map(function(key) {
-            return dat[key];
+            return parseInt(dat[key]);
         }));
     })
 }, 3000)
