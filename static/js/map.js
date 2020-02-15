@@ -13,13 +13,13 @@ $(function() {
                 attribute: "r",
                 values: Object.values(markerSizes),
                 scale: [5, 10],
-            }],/*
+            }],
             regions: [{
                 attribute: "fill",
                 values: getBuildingOccupancies(),
                 scale: ["#0071a4", "#c8eeff", "#444444"],
                 normalizeFunction: "linear"
-            }]*/
+            }]
         },
         focusOn: {
             x: 1,
@@ -27,7 +27,6 @@ $(function() {
             scale: 2.2
         },
         onRegionTipShow: function(event, label, code) {
-            console.log(code);
             var currOccupancy = getBuildingOccupancy(code);
             if(currOccupancy != "100") {
                 label.html(label.html() + " (Occupancy: " + currOccupancy + "%)");

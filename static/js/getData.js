@@ -6,7 +6,7 @@ setInterval(() => {
     })
 }, 3000)
 
-var markerOccupancy = {};
+var markerOccupancy = {"a":0,"b":0,"c":0,"d":0,"e":0,"f":0,"g":0,"h":0,"i":0,"j":0,"k":100};
 var markerPeople = {};
 var buildingOccupancy = {};
 
@@ -29,7 +29,8 @@ function plotPoints(dataValues) {
         if(hasSeats != -1) {
             var numPeople = 0;
             for(var i in markerBuildings[building]) {
-                numPeople += parseInt(markerOccupancy[markerBuildings[building][i]]);
+                var markerName = markerBuildings[building][i];
+                numPeople += parseInt(markerPeople[markerName]);
             }
             var occupancy = ((numPeople / buildingSizes[building]) * 100).toPrecision(4);
             buildingOccupancy[building] = occupancy;
@@ -39,7 +40,7 @@ function plotPoints(dataValues) {
     // Update map
     cmuMap = $("#map").vectorMap("get", "mapObject");
     cmuMap.series.markers[0].setValues(Object.values(markerOccupancy));
-    // cmuMap.series.regions[0].setValues(getBuildingOccupancies());    
+    cmuMap.series.regions[0].setValues(getBuildingOccupancies());    
 }
 
 function getBuildingOccupancy(building) {
@@ -49,9 +50,9 @@ function getBuildingOccupancy(building) {
 }
 
 function getBuildingOccupancies() {
-    var result = [];
+    var result = {};
     for(var building in mapData["paths"]) {
-        result.push(getBuildingOccupancy(building));
+        result[building] = getBuildingOccupancy(building);
     }
     return result;
 }
