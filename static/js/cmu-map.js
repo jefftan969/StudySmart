@@ -19,7 +19,7 @@ jQuery.fn.vectorMap('addMap', 'cmu-map', mapData);
 var markerCoords = {
     "UCBlackChairs": [41.4261,-115.5070],
     "UCGym": [41.7239, -115.4493],
-    "UCFront": [42.1175, -114.9417],
+    "UCForbes": [42.1175, -115.9417],
     "GHCBridge": [41.2327, -118.1739],
     "GHCMiddle": [41.5458, -118.0831],
     "GHCHillman": [41.8784, -117.9576],
@@ -28,12 +28,12 @@ var markerCoords = {
     "SCRothberg": [40.2646, -119.9118],
     "ANLevelA": [39.8526, -119.5726],
     "HLMurph": [39.5075, -116.8227]
-}
+};
 
 var markerNames = {
     "UCBlackChairs": "UC Black Chairs",
     "UCGym": "UC Gym",
-    "UCFront": "UC Forbes",
+    "UCForbes": "UC Forbes",
     "GHCBridge": "Gates Bridge",
     "GHCMiddle": "Gates Kitchen",
     "GHCHillman": "Hillman",
@@ -42,17 +42,41 @@ var markerNames = {
     "SCRothberg": "Rothberg's Roasters",
     "ANLevelA": "ANSYS Level A",
     "HLMurph": "Maggie Murph Cafe"
-}
+};
 
 var markerBuildings = {
-    "UC": ["UCBlackChairs", "UCGym", "UCFront"],
+    "CUC": ["UCBlackChairs", "UCGym", "UCForbes"],
     "GHC": ["GHCBridge", "GHCMiddle", "GHCHillman"],
     "NSH": ["NSHAtrium"],
     "WEH": ["WEHLaPrima"],
     "SC": ["SCRothberg"],
     "AN": ["ANLevelA"],
     "HL": ["HLMurph"]
-}
+};
+
+var markerSizes = {
+    "UCBlackChairs": 40,
+    "UCGym": 100,
+    "UCForbes": 30,
+    "GHCBridge": 15,
+    "GHCMiddle": 15,
+    "GHCHillman": 15,
+    "NSHAtrium": 60,
+    "WEHLaPrima": 20,
+    "SCRothberg": 25,
+    "ANLevelA": 35,
+    "HLMurph": 30
+};
+
+var buildingSizes = {
+    "CUC": 170,
+    "GHC": 45,
+    "NSH": 60,
+    "WEH": 20,
+    "SC": 25,
+    "AN": 35,
+    "HL": 30
+};
 
 var buildingData = {};
 for(path in mapData["paths"]) {
@@ -64,7 +88,6 @@ console.log("Building data: ");
 console.log(buildingData);
 
 var markerData = {"name": [], "coords": [], "size": [], "occupancy": []};
-var mapPos = document.getElementById("map").getBoundingClientRect();
 for(var i = 1; i < 10; i++) {
     markerData["name"].push("Marker "+i);
     markerData["coords"].push([42+Math.random(), -118+Math.random()]);
