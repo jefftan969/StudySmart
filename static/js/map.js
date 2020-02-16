@@ -8,7 +8,9 @@ $(function() {
             markers: [{
                 attribute: "fill",
                 values: Object.values(markerOccupancy),
-                scale: ["#0fa515", "#e5fee9", "#808080"]
+                scale: ["#0fa515", "#e5fee9", "#808080"],
+                min: 150,
+                max: 200
             },{
                 attribute: "r",
                 values: Object.values(markerSizes),
